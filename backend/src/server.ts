@@ -1,12 +1,20 @@
-import express from 'express';
+import app from "./app";
+import { PORT } from "./config";
 
-const app = express();
-const PORT = 3000;
+function startServer() {
+  try {
+    const server = app.listen(PORT, () => {
+      console.log(`Server running successfully on port: ${PORT}`);
+    });
 
-app.get('/', (req, res) => {
-  res.send('Backend is working!');
-});
+    server.on("error", (err) => {
+      console.error("Server failed to start:", err.message);
+      process.exit(1);
+    });
+  } catch (err: any) {
+    console.error("Unexpected error occurred", err.message);
+    process.exit(1);
+  }
+}
 
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+startServer();
