@@ -20,3 +20,7 @@ const animals: Animal[] = [
 export function getAllAnimals(): Animal[] {
   return animals;
 }
+
+export function getAnimalById(id: string): Animal | undefined {
+  return animals.find((a) => a.id === id);
+}
