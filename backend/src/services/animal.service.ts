@@ -24,3 +24,8 @@ export function getAllAnimals(): Animal[] {
 export function getAnimalById(id: string): Animal | undefined {
   return animals.find((a) => a.id === id);
 }
+
+export function addAnimal(animal: Animal) {
+  animals.push(animal)
+  return animal;
+}
