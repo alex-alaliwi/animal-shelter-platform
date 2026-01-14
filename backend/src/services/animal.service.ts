@@ -26,6 +26,10 @@ export function getAnimalById(id: string): Animal | undefined {
 }
 
 export function addAnimal(animal: Animal) {
-  animals.push(animal)
-  return animal;
+  const newAnimal: Animal = {
+    ...animal,
+    id: Date.now().toString(),
+  };
+  animals.push(newAnimal);
+  return newAnimal;
 }

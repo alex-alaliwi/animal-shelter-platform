@@ -1,6 +1,5 @@
 import { Router, Request, Response } from "express";
 import { getAllAnimals, getAnimalById, addAnimal } from "../services/animal.service";
-import { Animal } from "../models/animal.model";
 
 const router = Router();
 
@@ -20,10 +19,7 @@ router.get("/:id", (req: Request, res: Response) => {
 });
 
 router.post("/", (req: Request, res: Response) => {
-  const animal: Animal = req.body;
-
-  const created = addAnimal(animal);
-
+  const created = addAnimal(req.body);
   res.status(201).json({ animal: created });
 });
 
