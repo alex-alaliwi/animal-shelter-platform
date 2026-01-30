@@ -25,11 +25,12 @@ export function getAnimalById(id: string): Animal | undefined {
   return animals.find((a) => a.id === id);
 }
 
-export function addAnimal(animal: Animal) {
+export function addAnimal(animal: Omit<Animal, "id">): Animal {
   const newAnimal: Animal = {
     ...animal,
     id: Date.now().toString(),
   };
+
   animals.push(newAnimal);
   return newAnimal;
 }

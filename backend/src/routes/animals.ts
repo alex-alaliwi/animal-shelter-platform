@@ -1,5 +1,9 @@
 import { Router, Request, Response } from "express";
-import { getAllAnimals, getAnimalById, addAnimal } from "../services/animal.service";
+import {
+  getAllAnimals,
+  getAnimalById,
+  addAnimal,
+} from "../services/animal.service";
 
 const router = Router();
 
@@ -19,7 +23,22 @@ router.get("/:id", (req: Request, res: Response) => {
 });
 
 router.post("/", (req: Request, res: Response) => {
-  const created = addAnimal(req.body);
+  const { name, species, age, status } = req.body;
+
+  if (!name || !species || typeof age !== "number" || !status) {
+    return res.status(400).json({
+      message: "Invalid animal data",
+    });
+  }
+
+  if (status !== "available" && status !== "adopted") {
+    return res.status(400).json({
+      message: "Invalid status value",
+    });
+  }
+
+  const created = addAnimal({ name, species, age, status });
+
   res.status(201).json({ animal: created });
 });
 
